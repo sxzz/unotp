@@ -1,0 +1,70 @@
+{
+  "name": "unotp",
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.15.0",
+  "description": "Automatically complete npm OTP 2FA.",
+  "type": "module",
+  "license": "MIT",
+  "homepage": "https://github.com/sxzz/unotp#readme",
+  "bugs": {
+    "url": "https://github.com/sxzz/unotp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sxzz/unotp.git"
+  },
+  "author": "Kevin Deng <sxzz@sxzz.moe>",
+  "funding": "https://github.com/sponsors/sxzz",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./cli": "./dist/cli.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "unotp": "./dist/cli.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "lint": "eslint --cache .",
+    "lint:fix": "pnpm run lint --fix",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --cache --write .",
+    "release": "bumpp && node src/cli.ts pnpm publish",
+    "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+    "debug": "^4.4.1",
+    "tinyexec": "^1.0.1"
+  },
+  "devDependencies": {
+    "@sxzz/eslint-config": "^7.1.4",
+    "@sxzz/prettier-config": "^2.2.4",
+    "@types/debug": "^4.1.12",
+    "@types/node": "^24.3.0",
+    "bumpp": "^10.2.3",
+    "eslint": "^9.33.0",
+    "prettier": "^3.6.2",
+    "tsdown": "^0.14.1",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "prettier": "@sxzz/prettier-config",
+  "tsdown": {
+    "entry": "src/*.ts",
+    "exports": true
+  }
+}
