@@ -14,24 +14,31 @@ npm install -D unotp
 
 ## Setup
 
-> [!NOTE]
-> Currently, only 1Password is supported.
+### 1Password
 
 1. Install the [1Password CLI](https://developer.1password.com/docs/cli/get-started/).
-2. Set the `NPM_1PASSWORD_KEY` environment variable to the name of your npm item in 1Password, or use `op items list` to find the item ID.
+2. Set the `UNOTP_1PASSWORD_KEY` environment variable to the name of your npm item in 1Password, or use `op items list` to find the item ID.
 
 You can add this setting to your shell profile for convenience.
 
-### Bash / Zsh
+#### Bash / Zsh
 
 ```bash
-export NPM_1PASSWORD_KEY=npm
+export UNOTP_1PASSWORD_KEY=npm
 ```
 
-### Fish
+#### Fish
 
 ```fish
-set -gx NPM_1PASSWORD_KEY npm
+set -gx UNOTP_1PASSWORD_KEY npm
+```
+
+### Custom Command
+
+You can also use a custom command to retrieve the OTP. Set the `UNOTP_CUSTOM_CMD` environment variable to your command.
+
+```bash
+export UNOTP_CUSTOM_CMD="echo 123456"
 ```
 
 ## Usage

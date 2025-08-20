@@ -2,7 +2,7 @@
 
 import process from 'node:process'
 import { exec } from 'tinyexec'
-import { buildEnv, get1PasswordOtp } from './index.ts'
+import { buildEnv, get1PasswordOtp, getCustomOtp } from './index.ts'
 
 main()
 
@@ -14,18 +14,23 @@ async function main() {
     return
   }
 
-  const itemKey = process.env.NPM_1PASSWORD_KEY
-  if (!itemKey) {
+  const itemKey = process.env.UNOTP_1PASSWORD_KEY
+  const customCmd = process.env.UNOTP_CUSTOM_CMD
+
+  let otp: string
+  if (itemKey) {
+    otp = await get1PasswordOtp(itemKey)
+  } else if (customCmd) {
+    otp = await getCustomOtp(customCmd)
+  } else {
     console.error(
-      'No 1Password item key specified, please set the `NPM_1PASSWORD_KEY` environment variable',
+      'No 1Password item key or custom command specified. Please set either `UNOTP_1PASSWORD_KEY` or `UNOTP_CUSTOM_CMD` environment variable.',
     )
     process.exitCode = 2
     return
   }
 
-  const otp = await get1PasswordOtp(itemKey)
   const env = buildEnv(otp)
-
   await exec(cmd, undefined, {
     nodeOptions: {
       env,
