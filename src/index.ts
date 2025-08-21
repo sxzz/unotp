@@ -1,7 +1,7 @@
 import Debug from 'debug'
 import { exec } from 'tinyexec'
 
-const debug = Debug('unotp')
+export const debug: Debug.Debugger = Debug('unotp')
 
 export function buildEnv(otp: string | number): Record<string, string> {
   return {
@@ -10,18 +10,26 @@ export function buildEnv(otp: string | number): Record<string, string> {
 }
 
 export async function get1PasswordOtp(nameOrIdOrLink: string): Promise<string> {
+  debug('Retrieving OTP from 1Password')
+
   if (debug.enabled) {
     const { stdout: version } = await exec('op', ['--version'])
-    debug(`Using 1Password CLI v${version}`)
+    debug(`Using 1Password CLI v${version.trim()}`)
   }
 
   const { stdout } = await exec('op', ['items', 'get', nameOrIdOrLink, '--otp'])
-  return stdout.trim()
+  const otp = stdout.trim()
+  debug(`Retrieved OTP from 1Password`)
+
+  return otp
 }
 
 export async function getCustomOtp(cmd: string): Promise<string> {
-  const { stdout } = await exec(cmd, undefined, {
+  debug('Retrieving OTP using custom command %s', cmd)
+  const { stdout, exitCode } = await exec(cmd, undefined, {
     nodeOptions: { shell: true },
   })
+  debug(`Custom command exited with code ${exitCode}`)
+
   return stdout.trim()
 }

@@ -2,7 +2,7 @@
 
 import process from 'node:process'
 import { exec } from 'tinyexec'
-import { buildEnv, get1PasswordOtp, getCustomOtp } from './index.ts'
+import { buildEnv, debug, get1PasswordOtp, getCustomOtp } from './index.ts'
 
 main()
 
@@ -31,6 +31,8 @@ async function main() {
   }
 
   const env = buildEnv(otp)
+
+  debug('Executing command: %s', cmd)
   await exec(cmd, undefined, {
     nodeOptions: {
       env,
