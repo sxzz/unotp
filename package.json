@@ -1,7 +1,7 @@
 {
   "name": "unotp",
   "version": "0.1.0",
-  "packageManager": "pnpm@10.15.1",
+  "packageManager": "pnpm@10.16.1",
   "description": "Automatically complete npm OTP 2FA.",
   "type": "module",
   "license": "MIT",
@@ -44,18 +44,18 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "debug": "^4.4.1",
+    "debug": "^4.4.3",
     "tinyexec": "^1.0.1"
   },
   "devDependencies": {
     "@sxzz/eslint-config": "^7.1.4",
     "@sxzz/prettier-config": "^2.2.4",
     "@types/debug": "^4.1.12",
-    "@types/node": "^24.3.1",
+    "@types/node": "^24.4.0",
     "bumpp": "^10.2.3",
     "eslint": "^9.35.0",
     "prettier": "^3.6.2",
-    "tsdown": "^0.14.2",
+    "tsdown": "^0.15.1",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   },
