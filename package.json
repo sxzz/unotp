@@ -1,7 +1,7 @@
 {
   "name": "unotp",
   "version": "0.1.0",
-  "packageManager": "pnpm@10.33.4",
+  "packageManager": "pnpm@11.1.3",
   "description": "Automatically complete npm OTP 2FA.",
   "type": "module",
   "license": "MIT",
